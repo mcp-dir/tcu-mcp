@@ -1,0 +1,34 @@
+# Smithery configuration for TCU Jurisprudência
+# Schema: https://smithery.ai/docs/build/project-config
+# Remote HTTP MCP — server hosted at https://api.mcp.ai/p_tcu
+
+name: tcu-mcp
+displayName: "TCU Jurisprudência"
+description: >
+  Pesquisa pública da jurisprudência do Tribunal de Contas da União (TCU): busca por palavra-chave nos entendimentos exarados em acórdãos, na jurisprudência selecionada (enunciados) e nas súmulas, com sumário, trechos destacados, relator e links pro inteiro teor. Também lista os acórdãos mais recentes. Hospedado pela plataforma, sem credenciais.
+
+version: 0.1.0
+license: MIT
+homepage: https://github.com/mcp-dir/tcu-mcp
+repository: https://github.com/mcp-dir/tcu-mcp
+
+tags:
+  - tcu
+  - brazil
+  - med
+  - horizontal
+  - read-only
+
+# Remote HTTP MCP — sem startCommand local (servidor já hospedado)
+startCommand:
+  type: http
+  url: https://api.mcp.ai/p_tcu
+
+auth:
+  type: oauth2
+  resourceMetadataUrl: https://api.mcp.ai/p_tcu/.well-known/oauth-protected-resource
+  fallback:
+    type: agent-auth
+    description: >
+      Para clientes sem OAuth 2.1. O agente expõe uma tool authenticate(token).
+      Usuário gera o JWT em https://app.mcp.ai/agent-auth e cola no chat.
